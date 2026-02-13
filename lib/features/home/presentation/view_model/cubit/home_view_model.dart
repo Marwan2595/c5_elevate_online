@@ -1,0 +1,19 @@
+import 'package:c5_elevate_online/features/home/domain/models/product_model.dart';
+import 'package:c5_elevate_online/features/home/domain/use_cases/get_categories_use_case.dart';
+import 'package:c5_elevate_online/features/home/domain/use_cases/get_products_use_case.dart';
+
+class HomeViewModel {
+  HomeViewModel(this.getProductsUseCase, this.getCategoriesUseCase);
+
+  final GetProductsUseCase getProductsUseCase;
+  final GetCategoriesUseCase getCategoriesUseCase;
+
+  Future<void> getProducts() async {
+  List<ProductModel> products =  await getProductsUseCase();
+  }
+}
+
+// Injection
+// 1- Field injection
+// 2- Constructor injection<<<<<<<
+// 3- Function/Method injection
