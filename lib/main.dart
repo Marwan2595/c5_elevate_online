@@ -1,6 +1,9 @@
+import 'package:c5_elevate_online/config/di/di.dart';
+import 'package:c5_elevate_online/features/home/presentation/screens/home_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MainApp());
 }
 
@@ -9,12 +12,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return MaterialApp(home: HomeView());
   }
 }

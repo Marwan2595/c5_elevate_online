@@ -1,7 +1,9 @@
 import 'package:c5_elevate_online/features/home/domain/models/product_model.dart';
 import 'package:c5_elevate_online/features/home/domain/use_cases/get_categories_use_case.dart';
 import 'package:c5_elevate_online/features/home/domain/use_cases/get_products_use_case.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class HomeViewModel {
   HomeViewModel(this.getProductsUseCase, this.getCategoriesUseCase);
 
@@ -9,7 +11,12 @@ class HomeViewModel {
   final GetCategoriesUseCase getCategoriesUseCase;
 
   Future<void> getProducts() async {
-  List<ProductModel> products =  await getProductsUseCase();
+    print("Getting products...");
+    List<ProductModel> products = await getProductsUseCase.call();
+
+    products.forEach((product) {
+      print(">>>>>>>>" + product.title);
+    });
   }
 }
 
