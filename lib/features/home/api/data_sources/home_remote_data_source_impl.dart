@@ -14,7 +14,8 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceContract {
   }
 
   @override
-  Future<List<ProductDto>> getProducts() async {
-    return await homeApiClient.getProducts();
+  Future<List<ProductDTO>> getProducts( {int? page, int? limit}) async {
+    final response = await homeApiClient.getProducts( pageNumber: page, limit: limit);
+    return response.data ?? [];
   }
 }

@@ -9,7 +9,7 @@ class GetProductsUseCase {
     GetProductsUseCase(this.homeRepo);
     final HomeRepoContract homeRepo;
 
-  Future<List<ProductModel>> call() async {
-    return await homeRepo.getProducts();
+  Future<List<ProductModel>> call({int? page, int? limit}) async {
+    return await homeRepo.getProducts(  page: page, limit: limit);
   }
 }

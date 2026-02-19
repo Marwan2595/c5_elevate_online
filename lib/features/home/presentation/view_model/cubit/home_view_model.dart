@@ -12,10 +12,13 @@ class HomeViewModel {
 
   Future<void> getProducts() async {
     print("Getting products...");
-    List<ProductModel> products = await getProductsUseCase.call();
+    List<ProductModel> products = await getProductsUseCase.call(
+      limit: 3,
+      page: 5,
+    );
 
     products.forEach((product) {
-      print(">>>>>>>>" + product.title);
+      print(">>>>>>>>" + product.id + " " + product.title);
     });
   }
 }

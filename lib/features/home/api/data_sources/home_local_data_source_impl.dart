@@ -11,7 +11,7 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSourceContract {
   }
 
   @override
-  Future<List<ProductDto>> getProducts() {
+  Future<List<ProductDTO>> getProducts() {
     // TODO: implement getProducts
     throw UnimplementedError();
   }

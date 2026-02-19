@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -29,6 +30,7 @@ import '../../features/home/domain/use_cases/get_products_use_case.dart'
     as _i674;
 import '../../features/home/presentation/view_model/cubit/home_view_model.dart'
     as _i492;
+import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -37,11 +39,13 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i866.HomeApiClient>(() => _i866.HomeApiClient());
+    final dioModule = _$DioModule();
     gh.factory<_i495.GetCategoriesUseCase>(() => _i495.GetCategoriesUseCase());
+    gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.factory<_i594.HomeLocalDataSourceContract>(
       () => _i831.HomeLocalDataSourceImpl(),
     );
+    gh.factory<_i866.HomeApiClient>(() => _i866.HomeApiClient(gh<_i361.Dio>()));
     gh.factory<_i582.HomeRemoteDataSourceContract>(
       () => _i1033.HomeRemoteDataSourceImpl(gh<_i866.HomeApiClient>()),
     );
@@ -63,3 +67,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$DioModule extends _i977.DioModule {}
