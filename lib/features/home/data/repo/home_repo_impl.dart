@@ -1,5 +1,7 @@
+import 'package:c5_elevate_online/config/base_response/base_response.dart';
 import 'package:c5_elevate_online/features/home/data/data_sources/home_local_data_source_contract.dart';
 import 'package:c5_elevate_online/features/home/data/data_sources/home_remote_data_source_contract.dart';
+import 'package:c5_elevate_online/features/home/data/models/product_dto.dart';
 import 'package:c5_elevate_online/features/home/domain/models/product_model.dart';
 import 'package:c5_elevate_online/features/home/domain/repo/home_repo_contract.dart';
 import 'package:injectable/injectable.dart';
@@ -11,11 +13,25 @@ class HomeRepoImpl implements HomeRepoContract {
   final HomeLocalDataSourceContract homeLocalDataSource;
 
   @override
-  Future<List<ProductModel>> getProducts( {int? page, int? limit}) async {
+  Future<BaseResponse<List<ProductModel>>> getProducts({
+    int? page,
+    int? limit,
+  }) async {
     // Check for internet connection
-    return homeRemoteDataSource.getProducts(page: page, limit: limit).then((productsDTOs) {
-      return productsDTOs.map((dto) => dto.toDomain()).toList();
-    });
+    final response = await homeRemoteDataSource.getProducts(
+      page: page,
+      limit: limit,
+    );
+    switch (response) {
+      case SuccessBaseResponse<List<ProductDTO>>():
+        return SuccessBaseResponse<List<ProductModel>>(
+          data: response.data?.map((dto) => dto.toDomain()).toList() ?? [],
+        );
+      case ErrorBaseResponse<List<ProductDTO>>():
+        return ErrorBaseResponse<List<ProductModel>>(
+          errorMessage: response.errorMessage,
+        );
+    }
   }
 
   @override
