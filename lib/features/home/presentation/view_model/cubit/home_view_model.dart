@@ -11,7 +11,6 @@ import 'package:injectable/injectable.dart';
 class HomeViewModel extends Cubit<HomeState> {
   HomeViewModel(this._getProductsUseCase, this._getCategoriesUseCase)
     : super(HomeState());
-// Remote Change
   final GetProductsUseCase _getProductsUseCase;
   final GetCategoriesUseCase _getCategoriesUseCase;
 
@@ -28,7 +27,6 @@ class HomeViewModel extends Cubit<HomeState> {
         break;
     }
   }
-//Remote change 222
   Future<void> _getAllData() async {
     await Future.wait([_getProducts1(), _getProducts2()]);
   }
