@@ -1,6 +1,7 @@
 import 'package:c5_elevate_online/config/di/di.dart';
 import 'package:c5_elevate_online/features/home/domain/models/product_model.dart';
 import 'package:c5_elevate_online/features/home/presentation/view_model/cubit/home_view_model.dart';
+import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_events.dart';
 import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Home Screen")),
       body: BlocProvider<HomeViewModel>(
-        create: (context) => viewModel..init(), //State is now HomeLoadingState
+        create: (context) => viewModel..add(GetAllDataEvent()),
         child: Column(
           children: [
             BlocBuilder<HomeViewModel, HomeState>(

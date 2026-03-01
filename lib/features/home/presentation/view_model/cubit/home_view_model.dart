@@ -2,23 +2,34 @@ import 'package:c5_elevate_online/config/base_response/base_response.dart';
 import 'package:c5_elevate_online/features/home/domain/models/product_model.dart';
 import 'package:c5_elevate_online/features/home/domain/use_cases/get_categories_use_case.dart';
 import 'package:c5_elevate_online/features/home/domain/use_cases/get_products_use_case.dart';
+import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_events.dart';
 import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class HomeViewModel extends Cubit<HomeState> {
-  HomeViewModel(this.getProductsUseCase, this.getCategoriesUseCase)
-    : super(HomeState());
-
-  final GetProductsUseCase getProductsUseCase;
-  final GetCategoriesUseCase getCategoriesUseCase;
-
-  Future<void> init() async {
-    await Future.wait([getProducts1(), getProducts2()]);
+class HomeViewModel extends Bloc<HomeEvents, HomeState> {
+  HomeViewModel(this._getProductsUseCase, this._getCategoriesUseCase)
+    : super(HomeState()) {
+    on<GetAllDataEvent>(_getAllData);
+    on<GetProducts1Event>(_getProducts1);
+    on<GetProducts2Event>(_getProducts2);
   }
 
-  Future<void> getProducts1() async {
+  final GetProductsUseCase _getProductsUseCase;
+  final GetCategoriesUseCase _getCategoriesUseCase;
+
+  Future<void> _getAllData(HomeEvents event, Emitter<HomeState> emit) async {
+    await Future.wait([
+      _getProducts1(GetProducts1Event(), emit),
+      _getProducts2(GetProducts2Event(), emit),
+    ]);
+  }
+
+  Future<void> _getProducts1(
+    GetProducts1Event event,
+    Emitter<HomeState> emit,
+  ) async {
     print("Getting products...");
     // State is now HomeInitialState
     emit(
@@ -30,7 +41,7 @@ class HomeViewModel extends Cubit<HomeState> {
     );
     await Future.delayed(Duration(seconds: 2)); // Simulate network delay
     // State is now HomeLoadingState
-    final response = await getProductsUseCase(page: 1, limit: 10);
+    final response = await _getProductsUseCase(page: 1, limit: 10);
 
     switch (response) {
       case SuccessBaseResponse<List<ProductModel>>():
@@ -63,13 +74,16 @@ class HomeViewModel extends Cubit<HomeState> {
     }
   }
 
-  Future<void> getProducts2() async {
+  Future<void> _getProducts2(
+    GetProducts2Event event,
+    Emitter<HomeState> emit,
+  ) async {
     print("Getting products 2...");
     // State is now HomeInitialState
     emit(state.copyWith(isLoadingProducts2Param: true));
     await Future.delayed(Duration(seconds: 5)); // Simulate network delay
     // State is now HomeLoadingState
-    final response = await getProductsUseCase(page: 2, limit: 10);
+    final response = await _getProductsUseCase(page: 2, limit: 10);
 
     switch (response) {
       case SuccessBaseResponse<List<ProductModel>>():
