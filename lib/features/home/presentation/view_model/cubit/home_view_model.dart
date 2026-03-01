@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart';
 class HomeViewModel extends Cubit<HomeState> {
   HomeViewModel(this._getProductsUseCase, this._getCategoriesUseCase)
     : super(HomeState());
-
+// Remote Change
   final GetProductsUseCase _getProductsUseCase;
   final GetCategoriesUseCase _getCategoriesUseCase;
 
