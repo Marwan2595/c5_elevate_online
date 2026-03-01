@@ -28,7 +28,7 @@ class HomeViewModel extends Cubit<HomeState> {
         break;
     }
   }
-
+//Remote change 222
   Future<void> _getAllData() async {
     await Future.wait([_getProducts1(), _getProducts2()]);
   }
