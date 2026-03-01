@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Home Screen")),
       body: BlocProvider<HomeViewModel>(
-        create: (context) => viewModel..add(GetAllDataEvent()),
+        create: (context) => viewModel..doEvent(GetAllDataEvent()),
         child: Column(
           children: [
             BlocBuilder<HomeViewModel, HomeState>(

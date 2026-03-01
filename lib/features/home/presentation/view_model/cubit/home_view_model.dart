@@ -4,32 +4,36 @@ import 'package:c5_elevate_online/features/home/domain/use_cases/get_categories_
 import 'package:c5_elevate_online/features/home/domain/use_cases/get_products_use_case.dart';
 import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_events.dart';
 import 'package:c5_elevate_online/features/home/presentation/view_model/states/home_state.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class HomeViewModel extends Bloc<HomeEvents, HomeState> {
+class HomeViewModel extends Cubit<HomeState> {
   HomeViewModel(this._getProductsUseCase, this._getCategoriesUseCase)
-    : super(HomeState()) {
-    on<GetAllDataEvent>(_getAllData);
-    on<GetProducts1Event>(_getProducts1);
-    on<GetProducts2Event>(_getProducts2);
-  }
+    : super(HomeState());
 
   final GetProductsUseCase _getProductsUseCase;
   final GetCategoriesUseCase _getCategoriesUseCase;
 
-  Future<void> _getAllData(HomeEvents event, Emitter<HomeState> emit) async {
-    await Future.wait([
-      _getProducts1(GetProducts1Event(), emit),
-      _getProducts2(GetProducts2Event(), emit),
-    ]);
+  void doEvent(HomeEvents event) {
+    switch (event) {
+      case GetAllDataEvent():
+        _getAllData();
+        break;
+      case GetProducts1Event():
+        _getProducts1();
+        break;
+      case GetProducts2Event():
+        _getProducts2();
+        break;
+    }
   }
 
-  Future<void> _getProducts1(
-    GetProducts1Event event,
-    Emitter<HomeState> emit,
-  ) async {
+  Future<void> _getAllData() async {
+    await Future.wait([_getProducts1(), _getProducts2()]);
+  }
+
+  Future<void> _getProducts1() async {
     print("Getting products...");
     // State is now HomeInitialState
     emit(
@@ -74,10 +78,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeState> {
     }
   }
 
-  Future<void> _getProducts2(
-    GetProducts2Event event,
-    Emitter<HomeState> emit,
-  ) async {
+  Future<void> _getProducts2() async {
     print("Getting products 2...");
     // State is now HomeInitialState
     emit(state.copyWith(isLoadingProducts2Param: true));
