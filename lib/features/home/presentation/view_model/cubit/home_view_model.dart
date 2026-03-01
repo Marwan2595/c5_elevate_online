@@ -13,6 +13,11 @@ class HomeViewModel extends Cubit<HomeState> {
     : super(HomeState());
   final GetProductsUseCase _getProductsUseCase;
   final GetCategoriesUseCase _getCategoriesUseCase;
+  //kasnhegfjhsgdfjhsgdjfhgsdgjsh
+  /// Handle different events
+  ///
+  /// [HomeEvents] is the event to be handled
+  ///
 
   void doEvent(HomeEvents event) {
     switch (event) {
@@ -27,6 +32,7 @@ class HomeViewModel extends Cubit<HomeState> {
         break;
     }
   }
+
   Future<void> _getAllData() async {
     await Future.wait([_getProducts1(), _getProducts2()]);
   }
