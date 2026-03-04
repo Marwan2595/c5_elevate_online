@@ -25,8 +25,11 @@ class HomeViewModel extends Cubit<HomeState> {
       case GetProducts2Event():
         _getProducts2();
         break;
+      case RegisterEvent():
+        break;
     }
   }
+
   Future<void> _getAllData() async {
     await Future.wait([_getProducts1(), _getProducts2()]);
   }
