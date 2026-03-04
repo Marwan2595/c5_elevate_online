@@ -49,6 +49,21 @@ class HomeView extends StatelessWidget {
                     current.errorMessage2 != previous.errorMessage2;
               },
             ),
+
+            const SizedBox(height: 32),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Search",
+                hintText: "skjndgfjshd",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide(
+                    color: const Color.fromARGB(255, 188, 43, 32),
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
