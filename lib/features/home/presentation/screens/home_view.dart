@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home Screen")),
+      appBar: AppBar(title: Text("Login")),
       body: BlocProvider<HomeViewModel>(
         create: (context) => viewModel..doEvent(GetAllDataEvent()),
         child: Column(
@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
             BlocBuilder<HomeViewModel, HomeState>(
               builder: (context, state) {
                 return ProductHorizontalList(
-                  title: "Home Applications",
+                  title: "Login Products",
                   productsList: state.productsList1State.data ?? [],
                   isLoading: state.productsList1State.isLoading,
                   errorMessage: state.productsList1State.errorMessage,
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
             BlocBuilder<HomeViewModel, HomeState>(
               builder: (context, state) {
                 return ProductHorizontalList(
-                  title: "New Arrivals",
+                  title: "Login New Arrivals",
                   productsList: state.productsList2,
                   isLoading: state.isLoadingProducts2,
                   errorMessage: state.errorMessage2,

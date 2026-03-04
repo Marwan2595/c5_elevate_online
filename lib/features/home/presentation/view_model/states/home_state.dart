@@ -9,6 +9,8 @@ class HomeState {
   List<ProductModel> productsList2 = [];
   String? errorMessage2;
 
+  bool? loginVariable;
+
   HomeState({
     BaseState<List<ProductModel>>? productsList1State,
 
