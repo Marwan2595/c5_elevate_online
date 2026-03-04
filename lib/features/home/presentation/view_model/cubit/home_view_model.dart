@@ -27,6 +27,7 @@ class HomeViewModel extends Cubit<HomeState> {
         break;
     }
   }
+
   Future<void> _getAllData() async {
     await Future.wait([_getProducts1(), _getProducts2()]);
   }
