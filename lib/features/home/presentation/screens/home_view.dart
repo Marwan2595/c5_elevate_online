@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
             BlocBuilder<HomeViewModel, HomeState>(
               builder: (context, state) {
                 return ProductHorizontalList(
-                  title: "Register Home Applications",
+                  title: "Login Products",
                   productsList: state.productsList1State.data ?? [],
                   isLoading: state.productsList1State.isLoading,
                   errorMessage: state.productsList1State.errorMessage,
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
             BlocBuilder<HomeViewModel, HomeState>(
               builder: (context, state) {
                 return ProductHorizontalList(
-                  title: "Register New Arrivals",
+                  title: "Login Register New Arrivals",
                   productsList: state.productsList2,
                   isLoading: state.isLoadingProducts2,
                   errorMessage: state.errorMessage2,
