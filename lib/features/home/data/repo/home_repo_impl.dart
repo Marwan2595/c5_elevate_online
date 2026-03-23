@@ -12,6 +12,11 @@ class HomeRepoImpl implements HomeRepoContract {
   final HomeRemoteDataSourceContract homeRemoteDataSource;
   final HomeLocalDataSourceContract homeLocalDataSource;
 
+
+// Test Cases
+// homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 5 dtos
+// homeRemoteDataSource.getProducts return ErrorBaseResponse<List<ProductDTO>>
+// homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 0 dtos
   @override
   Future<BaseResponse<List<ProductModel>>> getProducts({
     int? page,

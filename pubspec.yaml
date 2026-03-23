@@ -23,6 +23,7 @@ dev_dependencies:
   build_runner: 
   retrofit_generator: ^10.0.1
   json_serializable: ^6.10.0
-
+  test: ^1.26.3
+  
 flutter:
   uses-material-design: true
