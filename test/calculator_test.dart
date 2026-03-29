@@ -27,32 +27,40 @@ void main() {
     print(">>>>>>>>>>>This is tearDownAll");
   });
 
-  test("Test add two positive numbers returns a positive number", () {
-    print("Test add two positive numbers");
-    //Arrange
-    int num1 = 2;
-    int num2 = 5;
-    //Act
-    int result = calculator.add(num1, num2);
-    //Assert
-    expect(result, 7);
-    expect(result, isPositive);
-    expect(result, isNotNull);
-    expect(result, isA<int>());
+  group("Add Function Tests", () {
+    test("Test add two positive numbers returns a positive number", () {
+      print("Test add two positive numbers");
+      //Arrange
+      int num1 = 2;
+      int num2 = 5;
+      //Act
+      int result = calculator.add(num1, num2);
+      //Assert
+      expect(result, 7);
+      expect(result, isPositive);
+      expect(result, isNotNull);
+      expect(result, isA<int>());
+    });
+
+    test("Test add one zero and one non-zero number", () {
+      print("Test add one zero and one non-zero number");
+      //Arrange
+      int num1 = 0;
+      int num2 = 5;
+      //Act
+      int result = calculator.add(num1, num2);
+      //Assert
+      expect(result, num2);
+      expect(result, isPositive);
+      expect(result, isNotNull);
+      expect(result, isA<int>());
+    });
   });
 
-  test("Test add one zero and one non-zero number", () {
-    print("Test add one zero and one non-zero number");
-    //Arrange
-    int num1 = 0;
-    int num2 = 5;
-    //Act
-    int result = calculator.add(num1, num2);
-    //Assert
-    expect(result, num2);
-    expect(result, isPositive);
-    expect(result, isNotNull);
-    expect(result, isA<int>());
+  group("Divide Function Tests", () {
+    test("Test Divide Function with two positive numbers", () {
+      //aaa
+    });
   });
 }
 //dry => don't repeat yourself
