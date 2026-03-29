@@ -12,17 +12,22 @@ class HomeRepoImpl implements HomeRepoContract {
   final HomeRemoteDataSourceContract homeRemoteDataSource;
   final HomeLocalDataSourceContract homeLocalDataSource;
 
+  // Test Cases
+  // homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 0 dtos
+  // homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 5 dtos
+  // homeRemoteDataSource.getProducts return ErrorBaseResponse<List<ProductDTO>>
 
-// Test Cases
-// homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 5 dtos
-// homeRemoteDataSource.getProducts return ErrorBaseResponse<List<ProductDTO>>
-// homeRemoteDataSource.getProducts return SuccessBaseResponse<List<ProductDTO>> with 0 dtos
+  //  Test Cases (Mocking)
+  // final response = SuccessBaseResponse<List<ProductDTO>>(data: []);//
+  // final response = SuccessBaseResponse<List<ProductDTO>>(data: [ProductDTO(),ProductDTO(),ProductDTO(),ProductDTO(),ProductDTO()]);
+  // final response = ErrorBaseResponse<List<ProductDTO>>(errorMessage: "Something went wrong. Please try again later.");
   @override
   Future<BaseResponse<List<ProductModel>>> getProducts({
     int? page,
     int? limit,
   }) async {
     // Check for internet connection
+
     final response = await homeRemoteDataSource.getProducts(
       page: page,
       limit: limit,
